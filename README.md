@@ -1,2 +1,5 @@
-# aoc-2022
-Advent of Code 2022
+# Advent of Code 2022
+
+Using R
+
+https://adventofcode.com/2022

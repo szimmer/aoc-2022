@@ -1,0 +1,43 @@
+---
+title: "Day 1"
+output: github_document
+---
+
+```{r packages}
+library(tidyverse)
+```
+
+```{r read}
+input <- read_table(here::here("Inputs", "input_01.txt"), col_names = FALSE, skip_empty_rows=FALSE)
+input
+```
+
+```{r solutionpart1}
+input %>%
+  mutate(
+    NextElf=is.na(lag(X1)),
+    Elf=cumsum(NextElf)
+  ) %>%
+  filter(!is.na(X1)) %>%
+  group_by(Elf) %>%
+  summarise(Calories=sum(X1), .groups="drop") %>%
+  pull(Calories) %>%
+  max()
+```
+
+
+```{r solutionpart2}
+input %>%
+  mutate(
+    NextElf=is.na(lag(X1)),
+    Elf=cumsum(NextElf)
+  ) %>%
+  filter(!is.na(X1)) %>%
+  group_by(Elf) %>%
+  summarise(Calories=sum(X1), .groups="drop") %>%
+  slice_max(Calories, n=3) %>%
+  pull(Calories) %>%
+  sum()
+  
+```
+
